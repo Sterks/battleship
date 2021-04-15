@@ -1,15 +1,19 @@
 package service
 
-
-type ICreateMatrix interface {
-	CreateMatrix(rangeInt int) error
+type ICreateBoard interface {
+	CreateBoard(size int) error
+	ShowBoard() error
+	AddShipInBoard(coordinates string) error
+	Shot(coord string) error
+	Clear() error
 }
 
 type Service struct {
-	ICreateMatrix
+	ICreateBoard
 }
 
 func NewService() *Service {
-	return &Service{}
+	return &Service{
+		ICreateBoard: NewBoard(),
+	}
 }
-
