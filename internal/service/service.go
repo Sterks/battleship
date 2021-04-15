@@ -1,8 +1,7 @@
 package service
 
-
 type ICreateMatrix interface {
-	CreateMatrix(rangeInt int) error
+	CreateMatrix(size int) error
 }
 
 type Service struct {
@@ -10,6 +9,7 @@ type Service struct {
 }
 
 func NewService() *Service {
-	return &Service{}
+	return &Service{
+		ICreateMatrix: NewMatrix(),
+	}
 }
-
