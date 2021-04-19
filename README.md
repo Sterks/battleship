@@ -28,3 +28,9 @@ Accept: application/json
 
 Очищаем поле
 
+```
+POST http://localhost:8000/clear
+Accept: application/json
+
+{}
+```
