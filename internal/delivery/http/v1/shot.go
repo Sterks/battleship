@@ -26,7 +26,6 @@ func (h *Handler) shot(c *gin.Context) {
 	}
 
 	hhs := h.services.ICreateBoard.ShotResult(coo)
-
 	c.JSON(http.StatusOK, hhs)
 
 	err2 := h.services.ICreateBoard.ShowBoard()

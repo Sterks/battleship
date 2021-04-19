@@ -14,14 +14,8 @@ type ICreateBoard interface {
 	Clear() error
 }
 
-type IShot interface {
-
-
-}
-
 type Service struct {
 	ICreateBoard ICreateBoard
-	IShot IShot
 }
 
 type Deps struct {
@@ -31,6 +25,5 @@ type Deps struct {
 func NewService(deps Deps) *Service {
 	return &Service{
 		ICreateBoard: NewBoard(),
-		IShot: NewShot(),
 	}
 }
