@@ -19,12 +19,14 @@ func (h *Handler) createMatrix(c *gin.Context) {
 
 	rI := rangeInt.RangeInt
 
-	if err2 := h.services.CreateBoard(rI); err2 != nil {
+	err := h.services.ICreateBoard.CreateBoard(rI)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return
 	}
-	err := h.services.ShowBoard()
-	if err != nil {
+
+	err2 := h.services.ICreateBoard.ShowBoard()
+	if err2 != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return
 	}

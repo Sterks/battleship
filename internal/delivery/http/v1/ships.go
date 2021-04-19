@@ -19,12 +19,12 @@ func (h *Handler) addShipInBoard(c *gin.Context) {
 	}
 
 	cs := coordinateShips.Coordinates
-	err := h.services.AddShipInBoard(cs)
+	err := h.services.ICreateBoard.AddShipInBoard(cs)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return
 	}
-	err2 := h.services.ShowBoard()
+	err2 := h.services.ICreateBoard.ShowBoard()
 	if err2 != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return

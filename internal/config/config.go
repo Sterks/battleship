@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	HTTP HTTPConfig
+	Board BoardConf
 }
 
 type HTTPConfig struct {
@@ -18,11 +19,15 @@ type HTTPConfig struct {
 	MaxHeaderMegabytes int           `mapstructure:"maxHeaderBytes"`
 }
 
+type BoardConf struct {
+	Size int `mapstructure:"size"`
+}
+
 func Init(path string) (*Config, error) {
 	viper.SetConfigName("main")
 	viper.SetConfigType("yml")
 	viper.AddConfigPath(".")
-	viper.AddConfigPath("./configs/")
+	viper.AddConfigPath("./configs/")  //("./configs/")
 	viper.AutomaticEnv()
 	err := viper.ReadInConfig()
 	if err != nil { // Handle errors reading the config file
@@ -30,7 +35,7 @@ func Init(path string) (*Config, error) {
 	}
 
 	var cfg Config
-	if err := viper.UnmarshalKey("http", &cfg.HTTP); err != nil {
+	if err := viper.Unmarshal(&cfg); err != nil {
 		return nil, err
 	}
 	return &cfg, nil

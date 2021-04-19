@@ -19,13 +19,17 @@ func (h *Handler) shot(c *gin.Context) {
 
 	coo := coord.Coord
 
-	err := h.services.Shot(coo)
+	err := h.services.ICreateBoard.Shot(coo)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return
 	}
 
-	err2 := h.services.ShowBoard()
+	hhs := h.services.ICreateBoard.ShotResult(coo)
+
+	c.JSON(http.StatusOK, hhs)
+
+	err2 := h.services.ICreateBoard.ShowBoard()
 	if err2 != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "false"})
 		return

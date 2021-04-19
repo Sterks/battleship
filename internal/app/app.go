@@ -6,7 +6,9 @@ import (
 	"battleship/internal/server"
 	"battleship/internal/service"
 	"battleship/pkg/logger"
+	"battleship/pkg/size"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"os"
 	"os/signal"
 	"syscall"
@@ -19,8 +21,12 @@ func Run(configPath string) {
 		return
 	}
 
+	mapSize := size.NewSize(viper.GetInt("Board.size"))
+
 	//repos := repository.NewRepositories()
-	services := service.NewService()
+	services := service.NewService(service.Deps{
+		MapSize: mapSize,
+	})
 	handlers := handler.NewHandler(services)
 
 	//handlers.Init(cfg.HTTP.Host, cfg.HTTP.Port)
